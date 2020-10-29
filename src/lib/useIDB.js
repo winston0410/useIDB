@@ -5,7 +5,8 @@ import {
   readDB
 } from '../utilities/idb.js'
 import {
-  isNil
+  isNil,
+  defaultWhenEmpty
 } from '@blackblock/common-utilities'
 
 const useIDB = ({
@@ -15,18 +16,14 @@ const useIDB = ({
   defaultValue
 }) => {
   const [appDatabase, setAppDatabase] = useState(undefined)
-  const [data, setData] = useState(defaultValue)
+  const [data, setData] = useState(async () => {
+    const dbInstance = await initDB(database, objectStore)
+    const savedData = await readDB(dbInstance, objectStore, key)
 
-  // Open IDB and Object store
-  useEffect(() => {
-    const asyncFn = async () => {
-      const dbInstance = await initDB(database, objectStore)
-      setAppDatabase(dbInstance)
-      console.log('running async', dbInstance)
-    }
+    setAppDatabase(dbInstance)
 
-    asyncFn()
-  }, [])
+    return defaultWhenEmpty(defaultValue)(savedData)
+  })
 
   // Write IDB if data change
   useEffect(() => {
@@ -34,7 +31,6 @@ const useIDB = ({
     // console.log('3rd running', appDatabase)
     // console.log('data', data)
     if (isNil(appDatabase)) return
-    console.log('write to db')
     writeDB(appDatabase, objectStore, key, data)
     // setData(defaultValue)
   }, [key, data])
