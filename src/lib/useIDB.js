@@ -16,24 +16,25 @@ const useIDB = ({
   defaultValue
 }) => {
   const [appDatabase, setAppDatabase] = useState(undefined)
-  const [data, setData] = useState(async () => {
-    const dbInstance = await initDB(database, objectStore)
-    const savedData = await readDB(dbInstance, objectStore, key)
+  const [data, setData] = useState(defaultValue)
 
-    setAppDatabase(dbInstance)
+  useEffect(() => {
+    const asyncFn = async () => {
+      const dbInstance = await initDB(database, objectStore)
+      const savedData = await readDB(dbInstance, objectStore, key)
+      await setAppDatabase(dbInstance)
+      // Wait until data is saved
+      await setData(savedData)
+    }
 
-    return defaultWhenEmpty(defaultValue)(savedData)
-  })
+    asyncFn()
+  }, [])
 
   // Write IDB if data change
   useEffect(() => {
-    // console.log(appDatabase, key, data)
-    // console.log('3rd running', appDatabase)
-    // console.log('data', data)
     if (isNil(appDatabase)) return
     writeDB(appDatabase, objectStore, key, data)
-    // setData(defaultValue)
-  }, [key, data])
+  }, [appDatabase, objectStore, key, data])
 
   return [data, setData]
 }
