@@ -15,7 +15,8 @@
     "plugin:mocha/recommended",
     "plugin:chai-expect/recommended",
     "plugin:chai-friendly/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
