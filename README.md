@@ -51,6 +51,14 @@ const exampleComponent = () => (
 
 ## Installation
 
+NPM
+
 ```
-npm i @blackblock/useIDB
+npm i @blackblock/use-idb
+```
+
+Yarn
+
+```
+yarn add @blackblock/use-idb
 ```
