@@ -44,7 +44,7 @@ const exampleComponent = () => (
     key: 'hello',
     defaultValue: 'world'
   }}>
-  {([data, setData]) => <input onChange={setData}>}
+  {([data, setData]) => <input value={data} onChange={setData}>}
   </IDB>
 )
 ```
