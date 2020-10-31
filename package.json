@@ -1,11 +1,11 @@
 {
-  "name": "@blackblock/useIDB",
+  "name": "@blackblock/use-idb",
   "version": "0.1.0",
   "description": "",
   "keywords": [
     "react",
     "react-component",
-    "useIDB"
+    "use-idb"
   ],
   "husky": {
     "hooks": {
