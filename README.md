@@ -13,7 +13,7 @@ This package uses [idb](https://www.npmjs.com/package/idb) under the hood.
 ```javascript
 import {
   useIDB //React hook
-} from '@blackblock/useIDB'
+} from '@blackblock/use-idb'
 
 //...
 //In your React component
@@ -35,7 +35,7 @@ useEffect(() => {
 ```javascript
 import {
   IDB //Render prop component
-} from '@blackblock/useIDB'
+} from '@blackblock/use-idb'
 
 const exampleComponent = () => (
   <IDB idbSetting={{
