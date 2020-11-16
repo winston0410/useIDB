@@ -28,7 +28,7 @@ const useIDB = ({
     }
 
     asyncFn()
-  }, [database, key, objectStore])
+  }, [])
 
   // Write IDB if data change
   useEffect(() => {
